@@ -88,8 +88,14 @@ def generate_display_industry_report(news_items):
 请用中文输出，专业严谨风格。
 """
     
-    # 调用通义千问
+    # 调用通义千问 (Coding Plan 专属端点)
     print("Calling Qwen API to generate report...")
+    print(f"API Endpoint: https://coding.dashscope.aliyuncs.com/v1")
+    
+    # 使用 dashscope 库，指定 base_url
+    import dashscope
+    dashscope.base_url = "https://coding.dashscope.aliyuncs.com/v1"
+    
     response = Generation.call(
         model="qwen-max",
         prompt=prompt,
