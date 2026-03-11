@@ -6,8 +6,8 @@ AI 生成日报模块 - 调用通义千问生成显示行业专业日报
 
 import json
 import os
+import requests
 from datetime import datetime
-from dashscope import Generation
 
 def load_news():
     """加载原始新闻"""
@@ -28,7 +28,7 @@ def format_news(news_list, limit=20):
     return "\n".join(formatted)
 
 def generate_display_industry_report(news_items):
-    """生成显示行业专业日报"""
+    """生成显示行业专业日报 - 使用 Coding Plan API"""
     
     # 构建 Prompt
     prompt = f"""
@@ -88,24 +88,43 @@ def generate_display_industry_report(news_items):
 请用中文输出，专业严谨风格。
 """
     
-    # 调用通义千问 (Coding Plan 专属端点)
-    print("Calling Qwen API to generate report...")
-    print(f"API Endpoint: https://coding.dashscope.aliyuncs.com/v1")
+    # 调用通义千问 Coding Plan API
+    api_key = os.environ.get("DASHSCOPE_API_KEY")
+    api_url = "https://coding.dashscope.aliyuncs.com/v1/chat/completions"
     
-    # 使用 dashscope 库，指定 base_url
-    import dashscope
-    dashscope.base_url = "https://coding.dashscope.aliyuncs.com/v1"
+    print(f"Calling Qwen API: {api_url}")
+    print(f"API Key: {api_key[:10]}...{api_key[-5:] if api_key else 'NONE'}")
     
-    response = Generation.call(
-        model="qwen-max",
-        prompt=prompt,
-        api_key=os.environ.get("DASHSCOPE_API_KEY")
-    )
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
     
-    if response.status_code == 200:
-        return response.output.text
-    else:
-        print(f"Error: {response.status_code} - {response.message}")
+    payload = {
+        "model": "qwen-max",
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "temperature": 0.7,
+        "max_tokens": 4000
+    }
+    
+    try:
+        response = requests.post(api_url, headers=headers, json=payload, timeout=120)
+        print(f"Response Status: {response.status_code}")
+        
+        if response.status_code == 200:
+            result = response.json()
+            content = result["choices"][0]["message"]["content"]
+            return content
+        else:
+            print(f"Error Response: {response.text}")
+            return None
+    except Exception as e:
+        print(f"Exception: {e}")
         return None
 
 if __name__ == "__main__":
@@ -125,3 +144,4 @@ if __name__ == "__main__":
         print(f"Report saved to {output_path}")
     else:
         print("Failed to generate report")
+        exit(1)
