@@ -30,12 +30,12 @@ def format_news(news_list, limit=20):
 def generate_display_industry_report(news_items):
     """生成显示行业专业日报 - 使用 Coding Plan API"""
     
-    # 构建 Prompt
+    # 构建 Prompt (限制新闻数量避免超时)
     prompt = f"""
 你是显示行业资深分析师，请根据以下新闻生成一份专业日报。
 
-【新闻列表】(共{len(news_items)}条)
-{format_news(news_items, 30)}
+【新闻列表】(共{len(news_items)}条，精选{min(15, len(news_items))}条)
+{format_news(news_items, 15)}
 
 请按以下结构整理：
 
@@ -113,7 +113,8 @@ def generate_display_industry_report(news_items):
     }
     
     try:
-        response = requests.post(api_url, headers=headers, json=payload, timeout=120)
+        print(f"Sending request with {len(news_items)} news items...")
+        response = requests.post(api_url, headers=headers, json=payload, timeout=300)
         print(f"Response Status: {response.status_code}")
         
         if response.status_code == 200:
