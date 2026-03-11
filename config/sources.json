@@ -1,0 +1,80 @@
+{
+  "chinese": [
+    {
+      "name": "显示网",
+      "url": "http://www.displaychina.com/feed",
+      "language": "zh",
+      "keywords": ["显示", "面板", "LCD", "OLED"]
+    },
+    {
+      "name": "集微网",
+      "url": "https://www.laoyaoba.com/rss",
+      "language": "zh",
+      "keywords": ["显示", "面板", "偏光片"]
+    },
+    {
+      "name": "WitDisplay",
+      "url": "http://www.witdisplay.com/feed",
+      "language": "zh",
+      "keywords": []
+    },
+    {
+      "name": "中国电子报",
+      "url": "http://www.cena.com.cn/feed",
+      "language": "zh",
+      "keywords": ["显示", "面板", "半导体"]
+    }
+  ],
+  "japanese": [
+    {
+      "name": "日経 xTECH",
+      "url": "https://xtech.nikkei.com/rss",
+      "language": "ja",
+      "keywords": ["显示", "パネル", "有機 EL"]
+    },
+    {
+      "name": "Display Bank",
+      "url": "https://www.displaybank.com/rss",
+      "language": "ja",
+      "keywords": ["ディスプレイ", "パネル"]
+    },
+    {
+      "name": "Impress Watch",
+      "url": "https://www.watch.impress.co.jp/index.rdf",
+      "language": "ja",
+      "keywords": ["显示", "モニター"]
+    },
+    {
+      "name": "マイナビニュース",
+      "url": "https://news.mynavi.jp/newsfeed",
+      "language": "ja",
+      "keywords": ["显示", "パネル"]
+    }
+  ],
+  "english": [
+    {
+      "name": "Display Daily",
+      "url": "https://www.displaydaily.com/feed",
+      "language": "en",
+      "keywords": []
+    },
+    {
+      "name": "OLED-Info",
+      "url": "https://www.oled-info.com/feed",
+      "language": "en",
+      "keywords": ["OLED", "display"]
+    },
+    {
+      "name": "DSCC",
+      "url": "https://www.displaysupplychain.com/news/rss",
+      "language": "en",
+      "keywords": ["display", "panel"]
+    },
+    {
+      "name": "FlatPanelHD",
+      "url": "https://www.flatpaneldhd.com/feed",
+      "language": "en",
+      "keywords": ["display", "panel", "TV"]
+    }
+  ]
+}
