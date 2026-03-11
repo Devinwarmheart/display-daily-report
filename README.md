@@ -1,0 +1,1 @@
+# Display Industry Daily Report
