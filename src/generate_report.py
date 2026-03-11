@@ -101,7 +101,7 @@ def generate_display_industry_report(news_items):
     }
     
     payload = {
-        "model": "qwen-max",
+        "model": "qwen3.5-plus",
         "messages": [
             {
                 "role": "user",
